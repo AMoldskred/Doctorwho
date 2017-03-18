@@ -1,0 +1,124 @@
+<html>
+<head>
+<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
+
+</head>
+<body style="background-color:#003B6F;">
+	
+	<div class="row container" style="height:95vh">
+    <img src="thx.gif" id="gif" class="z-depth-5" style="width:70%; position:fixed;z-index:999; display:none; margin: auto; top:0; bottom:0;"/>
+<div class="col s12 center" style="height:100%">
+	<div class="card-panel z-depth-5" style="margin-top:5%;">
+		<h1 style="color:#003B6F; font-size: 3vw;">Whats your favourite Doctor Who quote?</h1>
+          <form id="form" action="submit.php">
+
+<div class="input-field">
+<label for="num" style="float:left; ">Number of Doctor</label>
+<input type="number" min="1" max="13" id="num" name="doctor">
+</div>
+
+<div class="input-field">
+<label for="name" style="float:left; ">Name of doctor</label>
+<input type="text" name="name" id="name"><br>
+</div>
+<div class="input-field">
+<label for="quote" style="float:left;">Quote</label>
+<textarea class="materialize-textarea" style="max-width:100%;"name="quote" id="quote"></textarea>
+</div>
+<button class="btn waves-effect waves-light" type="submit" id="submit" onclick="">Submit
+    <i class="material-icons right">send</i>
+  </button>
+
+</form>
+
+        </div>
+
+</div>
+</div>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script>
+/*
+$('#submit').on('click',function(){
+
+var name = $('#name').val();
+var number = $('#num').val();
+var quote = $('#quote').val()
+
+$.ajax({
+  type: "POST",
+  url: "https://jsonblob.com/api/jsonBlob/b53eefc2-099f-11e7-a0ba-73194fc06dc3",
+  data: {
+  	'post':{
+  		'name':name,
+  		'num': number,
+  		'quote': quote
+  	}
+  },
+  success: function(){
+  	console.log('Success');
+  	
+  	$('#name').val('');
+  	$('#quote').val('');
+  	$('#num').val('');
+  
+  },
+  dataType: "json",
+  contentType : "application/json"
+});	
+
+})
+*/
+
+
+
+$('#form').on('submit',function (e) {
+
+  e.preventDefault();
+
+$name = $('#name').val();
+$number = $('#num').val();
+$quote = $('#quote').val();
+var d = new Date();
+$time = d.toISOString().slice(0,10).replace(/-/g,"");
+
+	
+    $.ajax({
+        url: 'submit.php',
+        cache: false,
+        type: 'POST',
+        data : {
+          'time' : $time,
+            'name': $name,
+            'quote': $quote,
+            'num': $number
+          
+        }
+        ,
+        success: function(json) {
+            console.log('all done');
+            $('#gif').fadeIn( "slow", function() {
+    setTimeout(function(){
+      $('#gif').fadeOut( "slow");
+    },5000);
+$('#name').val('');
+$('#num').val('');
+$('#quote').val('');
+  });
+        }
+    });
+});
+</script>
+<style>
+
+label{
+	color:#6f003b !important;
+}
+
+
+</style>
+
+  <!-- Compiled and minified JavaScript -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+</body>
+</html>

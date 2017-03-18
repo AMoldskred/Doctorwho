@@ -1,0 +1,112 @@
+<html>
+<head>
+<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script>
+
+
+function load(){
+    $('.wrap').fadeIn(1500);
+	}
+
+$(function() {
+
+  
+
+  $.getJSON("data.json", function(data) {
+    
+    window.datas = data;
+
+var leng = datas.length;
+var num = Math.floor((Math.random() * leng) + 1);
+
+$data = datas;
+
+var obj = $data[num];
+
+$('#name').html(obj.name);
+$('#q').html(obj.quote);
+
+
+document.getElementById('profile').setAttribute('data', "img/"+obj.num+".svg");
+  })
+    .fail(function(err) {
+      console.log(err.responseText);
+      alert('Something went wrong');
+    })
+});
+
+</script>
+<style>
+@font-face {
+    font-family: font;
+    src: url(Quote.ttf);
+}
+body{
+	
+	font-family: font;
+	padding:5%;
+	color:white;
+}
+#name{
+
+}
+.wrap{
+	display:none;
+text-align:center;
+}
+#q{
+
+}
+.quotewrap{
+
+}
+.imgwrap{
+
+}
+#profile{
+height:40vh;
+width:auto;	
+}
+.foot{
+	background-color: rgba(0,59,111, 0.9);
+	bottom:0;
+	left:0;
+	right:0;
+	position:fixed;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    font-size:2rem;
+}
+</style>
+</head>
+<body style="background-color:#003B6F;" onload="load()">
+
+<div class="wrap container">
+
+<div class="imgwrp">
+<object id="profile" class="svg"></object>
+
+</div>
+
+<div class="quotewrap">
+<h2 id="name"></h2>
+<h1 id="q"></h1>
+
+</div>
+
+</div>
+
+
+<footer class="foot">
+<a style="float:right; margin-right:5%;"href="http://thedoctorwho2.deviantart.com/">Image creator</a>
+<a style="" href="http://amolle.com/who/form.html">Submit Quote</a>
+<a style="float:left;margin-left:5%;"href="http://amolle.com/old">Made by Andreas Molle</a>
+</footer>
+  <!-- Compiled and minified JavaScript -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+
+</body>
+</html>
